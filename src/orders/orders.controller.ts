@@ -19,7 +19,7 @@ export class OrdersController {
 
   @Get()
   async getAll() {
-    return await this.ordersService.getAll();
+    return this.ordersService.getAll();
   }
 
   @Get('/:id')
@@ -39,7 +39,7 @@ export class OrdersController {
 
   @Post()
   async create(@Body() orderData: CreateOrderDTO) {
-    return await this.ordersService.create(orderData);
+    return this.ordersService.create(orderData);
   }
 
   @Put('/:id')
@@ -49,7 +49,6 @@ export class OrdersController {
   ) {
     const order = await this.ordersService.getById(id);
     if (!order) throw new NotFoundException('Order not found');
-    await this.ordersService.updateById(id, orderData);
-    return { success: true };
+    return this.ordersService.updateById(id, orderData);
   }
 }
